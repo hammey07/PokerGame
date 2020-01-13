@@ -8,11 +8,11 @@ public class Main {
     private static Hand hand3;
     private static Hand hand4;
     private static Hand hand5;
-    private static String Player1Name;
-    private static String Player2Name;
-    private static String Player3Name;
-    private static String Player4Name;
-    private static String Player5Name;
+    private static String player1Name;
+    private static String player2Name;
+    private static String player3Name;
+    private static String player4Name;
+    private static String player5Name;
     private static int totalPlayers;
 
     public static void main(String[] args) {
@@ -37,13 +37,13 @@ public class Main {
 
                     switch (selectionInt) {
                         case 1:
-                            System.out.printf("%-16s\n", Player1Name + " hand:");
+                            System.out.printf("%-16s\n", player1Name + " hand:");
 //Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
                             hand.displayCards();
                             exit = backToMenu();
                             break;
                         case 2:
-                            System.out.printf("%-16s\n", Player2Name + " hand:");
+                            System.out.printf("%-16s\n", player2Name + " hand:");
 //Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
                             hand2.displayCards();
                             exit = backToMenu();
@@ -51,10 +51,10 @@ public class Main {
 
                         case 3:
                             System.out.printf("Strength of all Hand Values:\n");
-                            System.out.println(Player1Name + "'s Hand:");
+                            System.out.println(player1Name + "'s Hand:");
                             hand.strength();
                             System.out.println("\n");
-                            System.out.println(Player2Name + "'s Hand:");
+                            System.out.println(player2Name + "'s Hand:");
                             hand2.strength();
                             System.out.println("\n");
                             exit = backToMenu();
@@ -81,10 +81,10 @@ public class Main {
     private static void getResults() {
 
         if (hand.compareTo(hand2) == 1)
-            System.out.println("!............... *** AND THE WINNER IS " + Player1Name + " *** ...............!");
+            System.out.println("!............... *** AND THE WINNER IS " + player1Name + " *** ...............!");
 
         else if (hand.compareTo(hand2) == -1)
-            System.out.println("!............... *** AND THE WINNER IS " + Player2Name + " *** ...............!");
+            System.out.println("!............... *** AND THE WINNER IS " + player2Name + " *** ...............!");
 
         else
             System.out.println("!............... *** AND IT'S A DRAW *** ...............!");
@@ -121,7 +121,17 @@ public class Main {
             String name = strInput.nextLine();
             nameArr.add(name);
         }
-        System.out.println(nameArr);
+        try {
+            if (totalPlayers > 1) {
+                player1Name = nameArr.get(0);
+                player2Name = nameArr.get(1);
+                player3Name = nameArr.get(2);
+                player4Name = nameArr.get(3);
+                player5Name = nameArr.get(4);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Names are all set!");
+        }
     }
 
 
