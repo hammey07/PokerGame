@@ -14,13 +14,20 @@ public class Main {
     private static String player4Name;
     private static String player5Name;
     private static int totalPlayers;
+    private static List<String> playerList = new ArrayList<String>();
 
     public static void main(String[] args) {
 
         getPlayers();
+        List<Hand> hands = new ArrayList<Hand>();
         Deck deck = new Deck(); //Creating constructors to call
-        hand = new Hand(deck); //classes Deck and Hand which create
-        hand2 = new Hand(deck); //a deck of cards and deals & evaluates two hands.
+        for (int i = 0; i < totalPlayers; i++) {
+            hands.add(new Hand(deck));
+//            hand = new Hand(deck); //classes Deck and Hand which create
+//            hand2 = new Hand(deck); //a deck of cards and deals & evaluates two hands.
+//            hands.get(i).displayCards();
+//            hands.get(i).strength();
+        }
 
         Scanner sc = new Scanner(System.in);
         String selection;
@@ -37,19 +44,57 @@ public class Main {
 
                     switch (selectionInt) {
                         case 1:
-                            System.out.printf("%-16s\n", player1Name + " hand:");
+                            if (1 <= totalPlayers) {
+                                System.out.printf("%-16s\n", playerList.get(0) + " hand:");
 //Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
-                            hand.displayCards();
-                            exit = backToMenu();
+                                hands.get(0).displayCards();
+                                exit = backToMenu();
+                            } else {
+                                System.out.println("Error! Terminating Program");
+                            }
                             break;
                         case 2:
-                            System.out.printf("%-16s\n", player2Name + " hand:");
+                            if (2 <= totalPlayers) {
+                                System.out.printf("%-16s\n", playerList.get(1) + " hand:");
 //Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
-                            hand2.displayCards();
-                            exit = backToMenu();
+                                hands.get(1).displayCards();
+                                exit = backToMenu();
+                            } else {
+                                System.out.println("Error! Terminating Program");
+                            }
+                            break;
+                        case 3:
+                            if (3 <= totalPlayers) {
+                                System.out.printf("%-16s\n", playerList.get(2) + " hand:");
+//Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
+                                hands.get(2).displayCards();
+                                exit = backToMenu();
+                            } else {
+                                System.out.println("Error! Please try again!");
+                            }
+                            break;
+                        case 4:
+                            if (4 <= totalPlayers) {
+                                System.out.printf("%-16s\n", playerList.get(3) + " hand:");
+//Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
+                                hands.get(3).displayCards();
+                                exit = backToMenu();
+                            } else {
+                                System.out.println("Error! Please try again!");
+                            }
+                            break;
+                        case 5:
+                            if (5 <= totalPlayers) {
+                                System.out.printf("%-16s\n", playerList.get(4) + " hand:");
+//Top and bottom’s cards are printed to the screen, as well as the strength of each hand.
+                                hands.get(4).displayCards();
+                                exit = backToMenu();
+                            } else {
+                                System.out.println("Error! Please try again!");
+                            }
                             break;
 
-                        case 3:
+                        case 8:
                             System.out.printf("Strength of all Hand Values:\n");
                             System.out.println(player1Name + "'s Hand:");
                             hand.strength();
@@ -59,10 +104,12 @@ public class Main {
                             System.out.println("\n");
                             exit = backToMenu();
                             break;
-
-                        case 4:
+                        case 77:
+                            System.out.println(playerList.size());
+                            break;
+                        case 9:
                             getResults();
-                        case 5: // EXIT APPLICATION
+                        case 10: // EXIT APPLICATION
                             System.out.println("Thank you for using this application! GoodBye");
                             exit = true;
                             break;
@@ -75,7 +122,6 @@ public class Main {
             }
         }
 
-//The winner of the game is printed to the screen after a comparison.
     }
 
     private static void getResults() {
@@ -93,11 +139,13 @@ public class Main {
     private static void displayMenu() {
         System.out.println("Menu : ");
         System.out.println("Type any number for selection");
-        System.out.println("1)View Player 1 cards");
-        System.out.println("2)View Player 2 cards");
-        System.out.println("3)Display Each Player's Hand Strength");
-        System.out.println("4)Declare Winner");
-        System.out.println("5)Exit");
+        for (int i = 1; i <= totalPlayers; i++) {
+            System.out.println(i + ")View " + playerList.get(i - 1) + " cards");
+
+        }
+        System.out.println("8)Display Each Player's Hand Strength");
+        System.out.println("9)Declare Winner");
+        System.out.println("10)Exit");
     }
 
     // navigates back to menu
@@ -112,26 +160,31 @@ public class Main {
 
     public static void getPlayers() {
         Scanner intInput = new Scanner(System.in);
-        System.out.println("Please enter Number of total players");
+        System.out.println("Please enter Number of total players (MAX 5 ALLOWED)");
         totalPlayers = intInput.nextInt();
         Scanner strInput = new Scanner(System.in);
-        List<String> nameArr = new ArrayList<String>();
         for (int i = 1; i <= totalPlayers; i++) {
             System.out.println("Please Enter Player " + i + " Name:");
             String name = strInput.nextLine();
-            nameArr.add(name);
-        }
-        try {
-            if (totalPlayers > 1) {
-                player1Name = nameArr.get(0);
-                player2Name = nameArr.get(1);
-                player3Name = nameArr.get(2);
-                player4Name = nameArr.get(3);
-                player5Name = nameArr.get(4);
+            playerList.add(name);
             }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Names are all set!");
-        }
+//        for (int i = 0; i <playerList.size(); i++) {
+//            System.out.println("Player " + i + " : " + playerList.get(i));
+//        }
+
+//
+//        try {
+//            if (totalPlayers > 1) {
+//                player1Name = nameArr.get(0);
+//                player2Name = nameArr.get(1);
+//                player3Name = nameArr.get(2);
+//                player4Name = nameArr.get(3);
+//                player5Name = nameArr.get(4);
+//            }
+//        } catch (IndexOutOfBoundsException e) {
+//            System.out.println("Names are all set!");
+//        }
+
     }
 
 
