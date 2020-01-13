@@ -3,21 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static Hand hand;
-    private static Hand hand2;
-    private static Hand hand3;
-    private static Hand hand4;
-    private static Hand hand5;
-    private static String player1Name;
-    private static String player2Name;
-    private static String player3Name;
-    private static String player4Name;
-    private static String player5Name;
     private static int totalPlayers;
     private static List<String> playerList = new ArrayList<String>();
 
     public static void main(String[] args) {
-
         getPlayers();
         List<Hand> hands = new ArrayList<Hand>();
         Deck deck = new Deck(); //Creating constructors to call
@@ -96,19 +85,15 @@ public class Main {
 
                         case 8:
                             System.out.printf("Strength of all Hand Values:\n");
-                            System.out.println(player1Name + "'s Hand:");
-                            hand.strength();
-                            System.out.println("\n");
-                            System.out.println(player2Name + "'s Hand:");
-                            hand2.strength();
-                            System.out.println("\n");
+                            for (int i = 0; i < hands.size(); i++) {
+                                System.out.println(playerList.get(i) + "'s Hand:");
+                                hands.get(i).strength();
+                                System.out.println("\n");
+                            }
                             exit = backToMenu();
                             break;
-                        case 77:
-                            System.out.println(playerList.size());
-                            break;
                         case 9:
-                            getResults();
+                            // getResults();
                         case 10: // EXIT APPLICATION
                             System.out.println("Thank you for using this application! GoodBye");
                             exit = true;
@@ -124,8 +109,8 @@ public class Main {
 
     }
 
+/*
     private static void getResults() {
-
         if (hand.compareTo(hand2) == 1)
             System.out.println("!............... *** AND THE WINNER IS " + player1Name + " *** ...............!");
 
@@ -135,6 +120,7 @@ public class Main {
         else
             System.out.println("!............... *** AND IT'S A DRAW *** ...............!");
     }
+*/
 
     private static void displayMenu() {
         System.out.println("Menu : ");
@@ -167,7 +153,7 @@ public class Main {
             System.out.println("Please Enter Player " + i + " Name:");
             String name = strInput.nextLine();
             playerList.add(name);
-            }
+        }
 //        for (int i = 0; i <playerList.size(); i++) {
 //            System.out.println("Player " + i + " : " + playerList.get(i));
 //        }
